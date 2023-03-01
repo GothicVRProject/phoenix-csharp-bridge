@@ -1,16 +1,13 @@
 #define DllExport extern "C" __declspec( dllexport )
 
-
 #include <iostream>
 #include <strings.h>
 #include <phoenix/vdfs.hh>
 
 using namespace phoenix;
 
-
-DllExport vdf_header* getVDFHeader()
-{
-	auto vdf = vdf_file::open("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gothic\\Data\\speech_babe_speech_engl.VDF");
+DllExport vdf_header* getVDFHeader(char* vdfPath) {
+	auto vdf = vdf_file::open(vdfPath);
 
 	auto header = new vdf_header;
 	header->comment = vdf.header.comment;
@@ -24,14 +21,32 @@ DllExport vdf_header* getVDFHeader()
 	return header;
 }
 
+
 DllExport const char* getHeaderComment(vdf_header* header) {
+	if (header->comment.empty())
+		return NULL;
+
 	return header->comment.c_str();
 }
 
+DllExport void disposeHeader(vdf_header* header) {
+	if(header != NULL) {
+        delete header;
+        header = NULL;
+    }
+}
+
+
 
 int main(int argc, char** argv) {
-	// auto buf = phoenix::buffer::mmap(argv[1]);
 //	std::cout << ":Test: " << outComment << std::endl;
+
+	auto header = getVDFHeader((char*)"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gothic\\Data\\SystemPack.vdf");
+
+
+	std::cout << "headerComment: " << header->comment << header->comment.empty() << "END;" << std::endl;
+
+
 
 	int a;
 	std::cin >> a;

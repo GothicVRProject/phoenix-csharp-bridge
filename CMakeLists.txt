@@ -12,7 +12,7 @@ option(PHOENIX_BUILD_TOOLS OFF)
 add_subdirectory(dependencies/phoenix) # Add phoenix source folder to build process (Creating .a file)
 
 add_library(phoenix-csharp-wrapper SHARED main.cc)
-#add_executable(test_lib main.cc) # uncomment for quick tests within main() function
+#add_executable(phoenix-csharp-wrapper main.cc) # uncomment for quick tests within main() function
 
 
 # We need to "bake" standard C/C++ libraries into exe/DLL
