@@ -9,7 +9,7 @@ project(test_lib VERSION 0.1.0)
 option(PHOENIX_BUILD_TESTS OFF)
 option(PHOENIX_BUILD_EXAMPLES OFF)
 option(PHOENIX_BUILD_TOOLS OFF)
-add_subdirectory(phoenix) # Add phoenix source folder to build process (Creating .a file)
+add_subdirectory(dependencies/phoenix) # Add phoenix source folder to build process (Creating .a file)
 
 add_library(test_lib SHARED main.cc)
 #add_executable(test_lib main.cc) # uncomment for quick tests within main() function
