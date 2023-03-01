@@ -34,3 +34,14 @@ cp ./build/libphoenix-csharp-wrapper.dll ../../Assets/unZENity-VR/Dependencies/
 
 * To check for exported DLL functions and dependencies being used: [Dependency Walker](https://www.dependencywalker.com/)
 * Howto export complex C++ objects via "wrapper": https://stackoverflow.com/questions/315051/using-a-class-defined-in-a-c-dll-in-c-sharp-code
+
+
+
+
+## Dev logic
+(interpreted from OpenGothic)
+
+1. Load all VDF files
+2. Merge them into one big chunk of vdf file (vdf_file.merge())
+3. Export these values to DLL consumer
+4. Free memory

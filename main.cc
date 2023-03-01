@@ -6,50 +6,42 @@
 
 using namespace phoenix;
 
-DllExport vdf_header* getVDFHeader(char* vdfPath) {
-	auto vdf = vdf_file::open(vdfPath);
 
-	auto header = new vdf_header;
-	header->comment = vdf.header.comment;
-	header->entry_count = vdf.header.entry_count;
-	header->file_count = vdf.header.file_count;
-	header->signature = vdf.header.signature;
-	header->size = vdf.header.size;
-	header->timestamp = vdf.header.timestamp;
-	header->version = vdf.header.version;
-
-	return header;
+DllExport vdf_file* createVDFContainer() {
+	return new vdf_file("Root");
 }
 
-
-DllExport const char* getHeaderComment(vdf_header* header) {
-	if (header->comment.empty())
-		return NULL;
-
-	return header->comment.c_str();
+DllExport void addVDFToContainer(vdf_file* vdfContainer, char* newVdfPath) {
+	vdfContainer->merge(vdf_file::open(newVdfPath));
 }
 
-DllExport void disposeHeader(vdf_header* header) {
-	if(header != NULL) {
-        delete header;
-        header = NULL;
+DllExport const vdf_entry* getVDFEntry(vdf_file* vdfContainer, char* fileName) {
+    return static_cast<const vdf_file*>(vdfContainer)->find_entry(fileName);
+}
+
+// DllExport const char* getHeaderComment(vdf_header* header) {
+// 	if (header->comment.empty())
+// 		return NULL;
+
+// 	return header->comment.c_str();
+// }
+
+DllExport void disposeVDFContainer(vdf_file* vdfContainer) {
+	if(vdfContainer != NULL) {
+        delete vdfContainer;
+        vdfContainer = NULL;
     }
 }
 
 
 
 int main(int argc, char** argv) {
-//	std::cout << ":Test: " << outComment << std::endl;
+	// getVDFHeader((char*)"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gothic\\Data\\SystemPack.vdf");
 
-	auto header = getVDFHeader((char*)"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gothic\\Data\\SystemPack.vdf");
-
-
-	std::cout << "headerComment: " << header->comment << header->comment.empty() << "END;" << std::endl;
-
+	// std::cout << "headerComment: " << header->comment << header->comment.empty() << "END;" << std::endl;
 
 
 	int a;
 	std::cin >> a;
-
 	return 0;
 }
