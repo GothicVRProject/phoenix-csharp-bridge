@@ -24,6 +24,11 @@ cmake -G "MinGW Makefiles" -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ```
 
+## Copy to parent folder (if used as submodule by unZENity-VR project)
+```powershell
+cp ./build/libphoenix-csharp-wrapper.dll ../../Assets/unZENity-VR/Dependencies/
+```
+
 
 ## Resources
 
