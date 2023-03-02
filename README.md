@@ -11,6 +11,8 @@ We're always looking for people with knowledge and/or spirit. Feel free to reach
 (tested mingw-w64 version: 12.2.0)
 
 ```powershell
+git submodule update --init --recursive
+
 choco install mingw
 ```
 
