@@ -24,14 +24,14 @@ cmake --build build
 
 ## Copy to parent folder (if used as submodule by unZENity-VR project)
 ```powershell
-cp ./build/libphoenix-csharp-wrapper.dll ../../Assets/unZENity-VR/Dependencies/
+cp ./build/libphoenix-csharp-bridge.dll ../../Assets/unZENity-VR/Dependencies/
 ```
 
 
 ## Resources
 
 * To check for exported DLL functions and dependencies being used: [Dependency Walker](https://www.dependencywalker.com/)
-* Howto export complex C++ objects via "wrapper": https://stackoverflow.com/questions/315051/using-a-class-defined-in-a-c-dll-in-c-sharp-code
+* Howto export complex C++ objects via "bridge": https://stackoverflow.com/questions/315051/using-a-class-defined-in-a-c-dll-in-c-sharp-code
 * Marshalling:
     * Data types which are automatically marshalled between C++ and C#: https://learn.microsoft.com/en-us/dotnet/standard/native-interop/type-marshalling
     * Howto do marshalling: https://dev.to/gabbersepp/call-function-in-unmanaged-dll-from-c-and-pass-custom-data-types-marshal-5c31
