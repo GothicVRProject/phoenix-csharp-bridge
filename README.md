@@ -1,5 +1,3 @@
-# phoenix-csharp-wrapper
-
 > Credits to [lmichaelis/phoenix](https://github.com/lmichaelis/phoenix) for the actual reader implementations of Gothic assets.
 
 This repository will leverage phoenix's parsing capabilities and prepares it to use within C# code.
