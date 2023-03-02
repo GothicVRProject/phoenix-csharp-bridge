@@ -42,4 +42,9 @@ cp ./build/libphoenix-csharp-wrapper.dll ../../Assets/unZENity-VR/Dependencies/
 * There are 3 ways of C# communicating with C++:
     1. P/Invoke
     2. COM
-    3. C++ CLI wrapper
+    3. C++/CLI (call C# from C++; wrong direction for our use case.)
+
+* Mono documentation about DllImport: https://www.mono-project.com/docs/advanced/pinvoke/
+
+DLL interopability:
+![DLL interoperability](https://mark-borg.github.io/img/posts/pinvoke-diagram.png)

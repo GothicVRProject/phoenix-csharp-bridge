@@ -22,48 +22,65 @@ DllExport const vdf_entry* getVDFEntry(vdf_file* vdfContainer, char* fileName) {
 }
 
 
+
 struct Vector3 {
   float x;
   float y;
   float z;
 };
 
+struct Mesh {
+  int verticesCount;
+  Vector3* vertices;
+};
 
-DllExport void loadWorld(vdf_file* vdfContainer, char* worldFileName, Vector3 vectors[]) {
+
+DllExport Mesh* loadWorldMesh(vdf_file* vdfContainer, char* worldFileName) {
   auto entry = getVDFEntry(vdfContainer, worldFileName);
   auto world = world::parse(entry->open(), game_version::gothic_1);
+  auto &origVertices = world.world_mesh.vertices;
 
-  auto oneVertice = world.world_mesh.vertices[0];
+  auto mesh = new Mesh();
+  mesh->verticesCount = origVertices.size();
+  mesh->vertices = new Vector3[mesh->verticesCount];
 
-  auto vector3 = Vector3{oneVertice.x, oneVertice.y, oneVertice.z};
+  for (int i=0; i<mesh->verticesCount; i++) {
+    mesh->vertices[i] = {origVertices[i].x, origVertices[i].y, origVertices[i].z};
+  }
 
-  vectors[0] = vector3;
+  return mesh;
 }
 
+DllExport int getWorldVerticesCount(Mesh* mesh) {
+  return mesh->verticesCount;
+}
 
-// DllExport const char* getHeaderComment(vdf_header* header) {
-// 	if (header->comment.empty())
-// 		return NULL;
+DllExport void getMeshVertex(Mesh* mesh, int index, float* x, float* y, float* z) {
+  *x = mesh->vertices[index].x;
+  *y = mesh->vertices[index].y;
+  *z = mesh->vertices[index].z;
+}
 
-// 	return header->comment.c_str();
-// }
+DllExport void disposeMesh(Mesh* mesh) {
+  delete mesh->vertices;
+  delete mesh;
+}
 
 DllExport void disposeVDFContainer(vdf_file* vdfContainer) {
-	if(vdfContainer != NULL) {
-        delete vdfContainer;
-        vdfContainer = NULL;
-    }
+  delete vdfContainer;
 }
 
 
 
 int main(int argc, char** argv) {
-	// getVDFHeader((char*)"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gothic\\Data\\SystemPack.vdf");
+  auto vdf = createVDFContainer();
+  addVDFToContainer(vdf, (char*)"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gothic\\Data\\worlds.vdf");
+  Mesh* mesh = loadWorldMesh(vdf, (char*)"world.zen");
+	std::cout << "vertices: " << getWorldVerticesCount(mesh) << std::endl;
 
-	// std::cout << "headerComment: " << header->comment << header->comment.empty() << "END;" << std::endl;
+  disposeMesh(mesh);
 
-
-	int a;
-	std::cin >> a;
-	return 0;
+	// int a;
+	// std::cin >> a;
+	// return 0;
 }
