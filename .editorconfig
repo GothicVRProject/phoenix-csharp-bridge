@@ -1,0 +1,11 @@
+# Homepage: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*.{c,cpp,cc,h,hpp}]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 2
