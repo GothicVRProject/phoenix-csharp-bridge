@@ -1,3 +1,4 @@
+#pragma once
 #define DllExport extern "C" __declspec( dllexport )
 
 #include <phoenix/vdfs.hh>

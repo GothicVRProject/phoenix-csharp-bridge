@@ -3,10 +3,13 @@ set(CMAKE_CXX_STANDARD 17)
 project(phoenix-csharp-bridge VERSION 0.1.0)
 
 
-# WARNING: Changed file count isn't recognized by default
-# If you add/remove a file, then you need to either change this CMakeLists.txt somewhere else as well
-# or re-execute build directory creation
-file(GLOB_RECURSE SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/*")
+set(SRC
+    src/main.cc
+    src/include/b_vdfs.hh
+    src/include/b_world.hh
+    src/source/b_vdfs.cc
+    src/source/b_world.cc
+)
 
 
 ##
