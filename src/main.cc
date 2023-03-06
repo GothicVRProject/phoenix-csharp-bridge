@@ -1,19 +1,11 @@
 #define DllExport extern "C" __declspec( dllexport )
 
 #include <iostream>
-#include <map>
-#include <strings.h>
 
 #include <b_vdfs.hh>
 #include <b_world.hh>
 
 using namespace phoenix;
-
-
-DllExport void disposeVDFContainer(vdf_file* vdfContainer) {
-  delete vdfContainer;
-}
-
 
 
 int main(int argc, char** argv) {

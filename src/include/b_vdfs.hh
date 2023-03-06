@@ -9,3 +9,4 @@ using namespace phoenix;
 DllExport vdf_file* createVDFContainer();
 DllExport void addVDFToContainer(vdf_file* vdfContainer, char* newVdfPath);
 DllExport const vdf_entry* getVDFEntry(vdf_file* vdfContainer, char* fileName);
+DllExport void disposeVDFContainer(vdf_file* vdfContainer);

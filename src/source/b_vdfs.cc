@@ -16,3 +16,7 @@ DllExport void addVDFToContainer(vdf_file* vdfContainer, char* newVdfPath) {
 DllExport const vdf_entry* getVDFEntry(vdf_file* vdfContainer, char* fileName) {
     return static_cast<const vdf_file*>(vdfContainer)->find_entry(fileName);
 }
+
+DllExport void disposeVDFContainer(vdf_file* vdfContainer) {
+  delete vdfContainer;
+}
