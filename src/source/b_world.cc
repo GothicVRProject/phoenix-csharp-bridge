@@ -17,33 +17,31 @@ DllExport Mesh* loadWorldMesh(vdf_file* vdfContainer, char* worldFileName) {
 
   auto mesh = new Mesh();
 
-  mesh->verticesCount = origVertices.size();
-  mesh->vertices = new Vector3[mesh->verticesCount];
-  for (int i=0; i<mesh->verticesCount; i++) {
-    mesh->vertices[i] = {origVertices[i].x, origVertices[i].y, origVertices[i].z};
+  mesh->vertices = {};
+  for (int i = 0; i < origVertices.size(); i++) {
+    mesh->vertices.push_back({origVertices[i].x, origVertices[i].y, origVertices[i].z});
   }
 
-  mesh->vertexIndicesCount = origPolygons.vertex_indices.size();
-  mesh->vertexIndices = new uint32_t[mesh->vertexIndicesCount];
-  for (int i=0; i<mesh->vertexIndicesCount; i++) {
-    mesh->vertexIndices[i] = origPolygons.vertex_indices[i];
+  mesh->vertexIndices = {};
+  for (int i = 0; i < origPolygons.vertex_indices.size(); i++) {
+    mesh->vertexIndices.push_back(origPolygons.vertex_indices[i]);
   }
 
   return mesh;
 }
 
 DllExport int getWorldVerticesCount(Mesh* mesh) {
-  return mesh->verticesCount;
+  return mesh->vertices.size();
 }
 
-DllExport void getMeshVertex(Mesh* mesh, int index, float* x, float* y, float* z) {
+DllExport void getWorldMeshVertex(Mesh* mesh, int index, float* x, float* y, float* z) {
   *x = mesh->vertices[index].x;
   *y = mesh->vertices[index].y;
   *z = mesh->vertices[index].z;
 }
 
 DllExport int getWorldMeshVertexIndicesCount(Mesh* mesh) {
-  return mesh->vertexIndicesCount;
+  return mesh->vertexIndices.size();
 }
 
 DllExport void getWorldMeshVertexIndex(Mesh* mesh, int index, uint32_t *value) {
@@ -51,8 +49,6 @@ DllExport void getWorldMeshVertexIndex(Mesh* mesh, int index, uint32_t *value) {
 }
 
 
-DllExport void disposeMesh(Mesh* mesh) {
-  delete mesh->vertices;
-  delete mesh->vertexIndices;
+DllExport void disposeWorldMesh(Mesh* mesh) {
   delete mesh;
 }
