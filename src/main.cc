@@ -1,5 +1,3 @@
-#define DllExport extern "C" __declspec( dllexport )
-
 #include <iostream>
 
 #include <b_vdfs.hh>

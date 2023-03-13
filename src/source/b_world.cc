@@ -1,14 +1,13 @@
-#define DllExport extern "C" __declspec( dllexport )
-
 #include <phoenix/vdfs.hh>
 #include <phoenix/world.hh>
+#include <exports.hh>
 #include <b_vdfs.hh>
 #include <b_world.hh>
 
 using namespace phoenix;
 
 
-DllExport Mesh* loadWorldMesh(vdf_file* vdfContainer, char* worldFileName) {
+EXPORT Mesh* loadWorldMesh(vdf_file* vdfContainer, char* worldFileName) {
   auto entry = getVDFEntry(vdfContainer, worldFileName);
   auto world = world::parse(entry->open(), game_version::gothic_1);
 
@@ -30,25 +29,25 @@ DllExport Mesh* loadWorldMesh(vdf_file* vdfContainer, char* worldFileName) {
   return mesh;
 }
 
-DllExport int getWorldVerticesCount(Mesh* mesh) {
+EXPORT int getWorldVerticesCount(Mesh* mesh) {
   return mesh->vertices.size();
 }
 
-DllExport void getWorldMeshVertex(Mesh* mesh, int index, float* x, float* y, float* z) {
+EXPORT void getWorldMeshVertex(Mesh* mesh, int index, float* x, float* y, float* z) {
   *x = mesh->vertices[index].x;
   *y = mesh->vertices[index].y;
   *z = mesh->vertices[index].z;
 }
 
-DllExport int getWorldMeshVertexIndicesCount(Mesh* mesh) {
+EXPORT int getWorldMeshVertexIndicesCount(Mesh* mesh) {
   return mesh->vertexIndices.size();
 }
 
-DllExport void getWorldMeshVertexIndex(Mesh* mesh, int index, uint32_t *value) {
+EXPORT void getWorldMeshVertexIndex(Mesh* mesh, int index, uint32_t *value) {
   *value = mesh->vertexIndices[index];
 }
 
 
-DllExport void disposeWorldMesh(Mesh* mesh) {
+EXPORT void disposeWorldMesh(Mesh* mesh) {
   delete mesh;
 }

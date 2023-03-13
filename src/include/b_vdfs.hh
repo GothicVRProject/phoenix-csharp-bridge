@@ -1,12 +1,12 @@
 #pragma once
-#define DllExport extern "C" __declspec( dllexport )
 
 #include <phoenix/vdfs.hh>
+#include <exports.hh>
 
 using namespace phoenix;
 
 
-DllExport vdf_file* createVDFContainer();
-DllExport void addVDFToContainer(vdf_file* vdfContainer, char* newVdfPath);
-DllExport const vdf_entry* getVDFEntry(vdf_file* vdfContainer, char* fileName);
-DllExport void disposeVDFContainer(vdf_file* vdfContainer);
+EXPORT vdf_file* createVDFContainer();
+EXPORT void addVDFToContainer(vdf_file* vdfContainer, char* newVdfPath);
+EXPORT const vdf_entry* getVDFEntry(vdf_file* vdfContainer, char* fileName);
+EXPORT void disposeVDFContainer(vdf_file* vdfContainer);
